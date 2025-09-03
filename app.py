@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "htn2025"
@@ -21,10 +21,14 @@ def sendMessage(data):
     print(data)
     emit("receiveMessage", {
         "message": data["message"],
-        "user": data["user"],
-    }, broadcast=True)
+        "user": data["user"]
+    },
+        broadcast=True)
 
-# BONUS TODO: add method to join user to room
+
+@socketio.on("changeRoom")
+def changeRoom(data):
+    join_room(data["name"])
 
 
 if __name__ == "__main__":

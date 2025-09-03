@@ -13,12 +13,14 @@ const sendMessage = (data) => {
 	document.getElementById("message").value = "";
 	socket.emit("sendMessage", {
 		"message": data,
+		"room": localStorage.getItem("room"),
 		"user": localStorage.getItem("user"),
 	});
 };
 
 const changeRoom = (data) => {
-	// BONUS TODO: join room for chat
+	localStorage.setItem("room", data);
+	socket.emit("changeRoom", {"name": data});
 };
 
 socket.on("receiveMessage", (data) => {
@@ -27,10 +29,3 @@ socket.on("receiveMessage", (data) => {
 	messageLine.appendChild(messageText);
 	document.getElementById("chatbox").appendChild(messageLine);
 });
-
-/*
- *
- function (data) {
-
- }
- */
