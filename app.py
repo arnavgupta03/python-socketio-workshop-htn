@@ -16,16 +16,9 @@ def connect():
     print("Connected!")
 
 
-@socketio.on("sendMessage")
-def sendMessage(data):
-    print(data)
-    emit("receiveMessage", {
-        "message": data["message"],
-        "user": data["user"],
-    }, broadcast=True)
+# TODO: add method to catch messages sent to connected user
 
 # BONUS TODO: add method to join user to room
-
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)

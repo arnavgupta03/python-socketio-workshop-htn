@@ -9,28 +9,11 @@ const onLoad = () => {
 };
 
 const sendMessage = (data) => {
-	console.log(data);
-	document.getElementById("message").value = "";
-	socket.emit("sendMessage", {
-		"message": data,
-		"user": localStorage.getItem("user"),
-	});
+	// TODO: send message to Socket.IO server
 };
 
 const changeRoom = (data) => {
 	// BONUS TODO: join room for chat
 };
 
-socket.on("receiveMessage", (data) => {
-	let messageLine = document.createElement("p");
-	let messageText = document.createTextNode(data.user + ": " + data.message);
-	messageLine.appendChild(messageText);
-	document.getElementById("chatbox").appendChild(messageLine);
-});
-
-/*
- *
- function (data) {
-
- }
- */
+// TODO: setup hook for receiving new messages
